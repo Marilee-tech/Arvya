@@ -83,7 +83,8 @@ const updateOneUser = async (req, res) => {
             nom,
             nomUtilisateur,
             email,
-            role
+            role,
+            statut
         } = req.body
 
         const resultat = await updateUser(
@@ -92,7 +93,8 @@ const updateOneUser = async (req, res) => {
             nom,
             nomUtilisateur,
             email,
-            role
+            role,
+            statut
         )
 
         if (resultat.affectedRows === 0) {

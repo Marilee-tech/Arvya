@@ -1,0 +1,159 @@
+.new-rdv-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #fbfaf7;
+    color: #292c27;
+}
+
+.new-rdv-content {
+    flex: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 55px 65px;
+}
+
+.new-rdv-back {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    border: none;
+    background: transparent;
+
+    color: #66735f;
+    font-size: 11px;
+
+    margin-bottom: 25px;
+}
+
+.new-rdv-header {
+    margin-bottom: 30px;
+}
+
+.new-rdv-header h1 {
+    margin: 0 0 7px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.new-rdv-header p {
+    margin: 0;
+    color: #73766f;
+    font-size: 13px;
+}
+
+.new-rdv-form {
+    background: white;
+
+    border: 1px solid #eeece6;
+    border-radius: 12px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 3px 12px rgba(50, 55, 45, 0.04);
+}
+
+.rdv-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    margin-bottom: 20px;
+}
+
+.rdv-form-group label {
+    color: #42463f;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.rdv-form-group input,
+.rdv-form-group select,
+.rdv-form-group textarea {
+    width: 100%;
+
+    border: 1px solid #dedfd9;
+    border-radius: 7px;
+
+    background: white;
+
+    padding: 10px 12px;
+
+    color: #373a35;
+    font-size: 12px;
+
+    outline: none;
+}
+
+.rdv-form-group textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.rdv-form-group input:focus,
+.rdv-form-group select:focus,
+.rdv-form-group textarea:focus {
+    border-color: #82917b;
+}
+
+.new-rdv-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    margin-top: 28px;
+    padding-top: 20px;
+
+    border-top: 1px solid #eeece6;
+}
+
+.rdv-cancel-button {
+    border: 1px solid #d5d7d1;
+    border-radius: 7px;
+
+    background: white;
+    color: #656961;
+
+    padding: 9px 15px;
+
+    font-size: 11px;
+}
+
+.rdv-submit-button {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #52674b;
+    color: white;
+
+    padding: 9px 15px;
+
+    font-size: 11px;
+}
+
+.rdv-submit-button:hover {
+    background: #43563e;
+}
+
+.rdv-submit-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.new-rdv-error {
+    background: #fff0ed;
+    color: #9b463b;
+
+    padding: 12px 15px;
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+
+    font-size: 11px;
+}

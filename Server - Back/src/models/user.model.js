@@ -65,11 +65,11 @@ const createUser = async (prenom, nom, nomUtilisateur, email, motDePasse, role) 
     }
 }
 
-const updateUser = async (id, prenom, nom, nomUtilisateur, email, role) => {
+const updateUser = async (id, prenom, nom, nomUtilisateur, email, role, statut) => {
     try {
         const resultat = await db.query(
-            'UPDATE Utilisateur SET prenom = ?, nom = ?, nom_utilisateur = ?, email = ?, role = ? WHERE id_utilisateur = ?',
-            [prenom, nom, nomUtilisateur, email, role, id]
+            'UPDATE Utilisateur SET prenom = ?, nom = ?, nom_utilisateur = ?, email = ?, role = ?, statut = ? WHERE id_utilisateur = ?',
+            [prenom, nom, nomUtilisateur, email, role, statut, id]
         )
 
         return resultat[0]

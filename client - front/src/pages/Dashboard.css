@@ -1,0 +1,285 @@
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #fbfaf7;
+    color: #292c27;
+}
+
+
+/* CONTENU PRINCIPAL */
+
+.dashboard-content {
+    flex: 1;
+    padding: 55px 65px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* HEADER */
+
+.dashboard-header {
+    margin-bottom: 35px;
+}
+
+.dashboard-header h1 {
+    margin: 0 0 7px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.dashboard-header p {
+    margin: 0;
+    color: #73766f;
+    font-size: 14px;
+}
+
+
+/* CARTES */
+
+.dashboard-card {
+    background: #ffffff;
+    border: 1px solid #eeece6;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(50, 55, 45, 0.04);
+}
+
+.dashboard-card h2 {
+    font-size: 15px;
+    margin: 0 0 18px;
+    font-weight: 600;
+}
+
+
+/* PARTIE HAUTE */
+
+.dashboard-top {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(230px, 0.8fr);
+    gap: 22px;
+    margin-bottom: 25px;
+}
+
+
+/* AUJOURD'HUI */
+
+.card-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.date-badge {
+    background: #eef4e9;
+    color: #52664b;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 11px;
+}
+
+.today-event {
+    display: flex;
+    gap: 13px;
+    padding: 13px 0;
+    border-bottom: 1px solid #f0eee9;
+}
+
+.today-event:last-child {
+    border-bottom: none;
+}
+
+.today-event strong {
+    font-size: 13px;
+}
+
+.today-event p {
+    margin: 4px 0 0;
+    color: #85877f;
+    font-size: 11px;
+}
+
+.event-dot {
+    width: 7px;
+    height: 7px;
+    margin-top: 5px;
+    border-radius: 50%;
+    background: #627b58;
+    flex-shrink: 0;
+}
+
+
+/* PATIENT */
+
+.patient-card {
+    text-align: center;
+}
+
+.patient-avatar {
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    background: #e8eee3;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #56684f;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.patient-card h3 {
+    font-size: 15px;
+    margin: 0;
+}
+
+.patient-card p {
+    color: #7e8179;
+    font-size: 12px;
+}
+
+.outline-button {
+    background: white;
+    border: 1px solid #9ba493;
+    color: #4f6049;
+    padding: 8px 15px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+
+/* BAS DU DASHBOARD */
+
+.dashboard-bottom {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(230px, 0.8fr);
+    gap: 22px;
+}
+
+
+/* NOUVELLES */
+
+.news-item {
+    display: flex;
+    gap: 12px;
+    padding: 17px 0;
+    border-bottom: 1px solid #efede8;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-item h3 {
+    margin: 0 0 6px;
+    font-size: 13px;
+}
+
+.news-item p {
+    margin: 0;
+    color: #73766f;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.news-dot {
+    width: 7px;
+    height: 7px;
+    margin-top: 5px;
+    background: #708565;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.text-button {
+    border: none;
+    background: none;
+    color: #627158;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+
+/* COLONNE DROITE */
+
+.dashboard-side {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.next-appointment strong {
+    font-size: 13px;
+}
+
+.next-appointment p {
+    margin: 6px 0;
+    color: #777a73;
+    font-size: 11px;
+}
+
+
+/* CONTACTS */
+
+.contact-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 13px;
+}
+
+.contact-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #eef0ea;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+}
+
+.contact-row strong {
+    font-size: 11px;
+}
+
+.contact-row p {
+    margin: 2px 0 0;
+    color: #898b85;
+    font-size: 10px;
+}
+
+
+/* INFORMATIONS IMPORTANTES */
+
+.important-card {
+    background: #fff8f5;
+}
+
+.important-card p {
+    color: #706b67;
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+
+/* MESSAGES */
+
+.empty-message {
+    color: #92958e;
+    font-size: 12px;
+}
+
+.dashboard-error {
+    background: #fff0ed;
+    color: #9b463b;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}

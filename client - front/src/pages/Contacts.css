@@ -1,0 +1,241 @@
+.contacts-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #fbfaf7;
+    color: #292c27;
+}
+
+.contacts-content {
+    flex: 1;
+    padding: 55px 65px;
+}
+
+
+/* HEADER */
+
+.contacts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    margin-bottom: 35px;
+}
+
+.contacts-header h1 {
+    margin: 0 0 7px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.contacts-header p {
+    margin: 0;
+    color: #73766f;
+    font-size: 13px;
+}
+
+
+/* BOUTON AJOUTER */
+
+.add-contact-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 11px 18px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #52674b;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.add-contact-button:hover {
+    background: #43563e;
+    transform: translateY(-1px);
+}
+
+
+/* GRILLE */
+
+.contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 20px;
+}
+
+
+/* CARTE CONTACT */
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #eeece6;
+    border-radius: 12px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 3px 12px rgba(50, 55, 45, 0.04);
+}
+
+
+/* AVATAR */
+
+.contact-avatar {
+    width: 55px;
+    height: 55px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eef1eb;
+    color: #52674b;
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/* INFORMATIONS */
+
+.contact-info {
+    flex: 1;
+}
+
+.contact-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 14px;
+}
+
+.contact-title h2 {
+    margin: 0;
+
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.contact-type {
+    padding: 4px 9px;
+
+    border-radius: 20px;
+
+    background: #edf2e9;
+    color: #52674b;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+/* TELEPHONE + EMAIL */
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #666b63;
+    font-size: 12px;
+}
+
+.contact-detail svg {
+    color: #73806d;
+}
+
+
+/* ETAT VIDE */
+
+.contacts-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 50px;
+
+    background: white;
+
+    border: 1px solid #eeece6;
+    border-radius: 12px;
+
+    text-align: center;
+    color: #73766f;
+}
+
+.contacts-empty h2 {
+    margin: 15px 0 5px;
+
+    color: #292c27;
+    font-size: 17px;
+}
+
+.contacts-empty p {
+    margin: 0;
+    font-size: 12px;
+}
+
+
+/* MESSAGES */
+
+.contacts-message {
+    color: #73766f;
+    font-size: 13px;
+}
+
+.contacts-error {
+    padding: 12px 15px;
+
+    border-radius: 8px;
+
+    background: #fff0ed;
+    color: #9b463b;
+
+    font-size: 12px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+
+    .contacts-content {
+        padding: 30px 20px;
+    }
+
+    .contacts-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .contacts-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

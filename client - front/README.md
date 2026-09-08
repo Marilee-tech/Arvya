@@ -1,18 +1,249 @@
-# React + Vite
+# ARVYA
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Le carnet de vie partagé
 
-Currently, two official plugins are available:
+ARVYA est une application web permettant aux familles et aux professionnels de l'accompagnement de partager les informations importantes concernant une personne accompagnée.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+L'objectif est de centraliser les transmissions, les rendez-vous, les contacts et les informations utiles afin de faciliter la communication entre les différents intervenants.
 
-## React Compiler
+> Projet réalisé dans le cadre de ma formation en développement web.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+---
 
-Note: This will impact Vite dev & build performances.
+## Fonctionnalités
 
-## Expanding the ESLint configuration
+### Authentification
+- Connexion utilisateur
+- Mot de passe sécurisé avec bcrypt
+- Authentification avec JWT
+- Gestion des comptes actifs et inactifs
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Gestion des rôles
+
+L'application possède trois types d'utilisateurs :
+
+- Administrateur
+- Professionnel
+- Famille
+
+Les autorisations sont contrôlées côté backend selon le rôle de l'utilisateur.
+
+### Personnes accompagnées
+- Création
+- Consultation
+- Modification
+- Suppression
+
+Une famille peut uniquement consulter les personnes accompagnées auxquelles elle est associée.
+
+### Transmissions
+- Création
+- Consultation
+- Modification
+- Suppression
+- Gestion de la visibilité des transmissions
+
+Les transmissions peuvent notamment être rendues visibles à la famille.
+
+Une famille peut uniquement consulter les transmissions autorisées concernant les personnes auxquelles elle est associée.
+
+### Rendez-vous
+- Création
+- Consultation
+- Modification
+- Suppression
+
+### Contacts
+- Création
+- Consultation
+- Modification
+- Suppression
+
+### Associations
+
+Une table Association permet de relier les utilisateurs aux personnes accompagnées.
+
+Elle permet notamment de contrôler les données accessibles aux utilisateurs ayant le rôle Famille.
+
+---
+
+## Technologies utilisées
+
+### Frontend
+
+- React
+- JavaScript
+- HTML
+- CSS
+
+### Backend
+
+- Node.js
+- Express.js
+- MySQL
+- mysql2
+
+### Sécurité
+
+- bcrypt
+- JSON Web Token (JWT)
+- Middleware d'authentification
+- Gestion des autorisations par rôle
+
+### Outils
+
+- Visual Studio Code
+- DBeaver
+- Thunder Client
+- Git
+- GitHub
+- Figma
+
+---
+
+## Base de données
+
+La base de données ARVYA contient notamment les tables suivantes :
+
+- Utilisateur
+- Personne_Accompagnee
+- Association
+- Contact
+- Transmission
+- Rendez_vous
+
+---
+
+## Architecture du backend
+
+Le backend utilise une organisation basée sur :
+
+- **Routes** : définissent les endpoints de l'API.
+- **Controllers** : traitent les requêtes et les réponses.
+- **Models** : communiquent avec la base de données MySQL.
+- **Middleware** : contrôle l'authentification et les autorisations.
+
+Exemple :
+
+Utilisateur → Route → Middleware → Controller → Model → MySQL
+
+---
+
+## Installation
+
+Cloner le projet :
+
+```bash
+git clone URL_DU_REPOSITORY
+```
+
+Installer les dépendances :
+
+```bash
+npm install
+```
+
+Créer un fichier `.env` avec les variables d'environnement nécessaires.
+
+Exemple :
+
+```env
+DB_HOST=
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
+JWT_SECRET=
+PORT=3000
+```
+
+⚠️ Le fichier `.env` ne doit jamais être envoyé sur GitHub.
+
+---
+
+## Lancer le backend
+
+Depuis le dossier backend :
+
+```bash
+npm run dev
+```
+
+Le serveur est accessible par défaut sur :
+
+```text
+http://localhost:3000
+```
+
+---
+
+## API
+
+Quelques exemples de routes disponibles :
+
+```text
+POST   /auth/login
+
+GET    /users
+POST   /users
+PUT    /users/:id
+DELETE /users/:id
+
+GET    /patients
+POST   /patients
+PUT    /patients/:id
+DELETE /patients/:id
+
+GET    /contacts
+POST   /contacts
+PUT    /contacts/:id
+DELETE /contacts/:id
+
+GET    /transmissions
+POST   /transmissions
+PUT    /transmissions/:id
+DELETE /transmissions/:id
+
+GET    /rendezvous
+POST   /rendezvous
+PUT    /rendezvous/:id
+DELETE /rendezvous/:id
+```
+
+Certaines routes nécessitent un JWT et des autorisations spécifiques selon le rôle de l'utilisateur.
+
+---
+
+## État du projet
+
+🚧 ARVYA est actuellement en cours de développement.
+
+Backend :
+- CRUD : terminé
+- Connexion MySQL : terminée
+- Authentification JWT : terminée
+- Gestion des rôles : terminée
+- Filtrage des données Famille : terminé
+- Tests et vérifications finales : en cours
+
+Frontend :
+- Maquettes : réalisées
+- Développement React : en cours
+
+---
+
+## Évolutions envisagées
+
+À terme, ARVYA pourrait intégrer :
+
+- une application mobile ;
+- des notifications ;
+- la transcription vocale ;
+- des statistiques et tableaux de bord ;
+- des fonctionnalités basées sur l'intelligence artificielle ;
+- la reformulation de certaines transmissions professionnelles dans un langage plus accessible aux familles.
+
+---
+
+## Auteur
+
+Projet développé par Marilee Caille dans le cadre de sa formation en développement web.

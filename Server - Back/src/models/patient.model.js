@@ -122,18 +122,72 @@ const updatePatient = async (id, prenom, nom, dateDeNaissance, adresse, informat
 }
 
 const deletePatient = async (id) => {
+
+    const connection =
+        await db.getConnection()
+
     try {
-        const resultat = await db.query(
-            'DELETE FROM Personne_Accompagnee WHERE id_personne_accompagnee = ?',
+
+        await connection.beginTransaction()
+
+
+        await connection.query(
+            `DELETE FROM Association
+       WHERE id_personne_accompagnee = ?`,
             [id]
         )
 
-        return resultat[0]
+
+        await connection.query(
+            `DELETE FROM Contact
+       WHERE id_personne_accompagnee = ?`,
+            [id]
+        )
+
+
+        await connection.query(
+            `DELETE FROM Transmission
+       WHERE id_personne_accompagnee = ?`,
+            [id]
+        )
+
+
+        await connection.query(
+            `DELETE FROM Rendez_vous
+       WHERE id_personne_accompagnee = ?`,
+            [id]
+        )
+
+
+        const [resultat] =
+            await connection.query(
+                `DELETE FROM Personne_Accompagnee
+         WHERE id_personne_accompagnee = ?`,
+                [id]
+            )
+
+
+        await connection.commit()
+
+
+        return resultat
+
 
     } catch (error) {
+
+        await connection.rollback()
+
         console.log(error)
+
         throw error
+
+
+    } finally {
+
+        connection.release()
+
     }
+
 }
 
 export { getAllPatients, getPatientById, getFamilyPatients, getFamilyPatientById, createPatient, updatePatient, deletePatient }

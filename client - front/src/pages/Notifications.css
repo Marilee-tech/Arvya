@@ -1,0 +1,165 @@
+.notifications-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #fbfaf7;
+    color: #292c27;
+}
+
+
+.notifications-content {
+    flex: 1;
+    padding: 55px 65px;
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+
+.notifications-header {
+    margin-bottom: 35px;
+}
+
+
+.notifications-header h1 {
+    margin: 0 0 7px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+
+.notifications-header p {
+    margin: 0;
+    color: #73766f;
+    font-size: 14px;
+}
+
+
+.notifications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+
+.notification-card {
+    display: flex;
+    gap: 16px;
+
+    background: white;
+
+    border: 1px solid #eeece6;
+    border-radius: 12px;
+
+    padding: 20px 22px;
+
+    box-shadow:
+        0 3px 12px rgba(50, 55, 45, 0.04);
+}
+
+
+.notification-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e9efe5;
+    color: #596c52;
+}
+
+
+.notification-info {
+    flex: 1;
+}
+
+
+.notification-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 8px;
+}
+
+
+.notification-title-row h2 {
+    margin: 0;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+.notification-info strong {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+.notification-info p {
+    margin: 3px 0;
+
+    color: #777b73;
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+.notification-badge {
+    background: #f1f4ee;
+    color: #61705a;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+}
+
+
+.notifications-error {
+    background: #fff0ed;
+    color: #9b463b;
+
+    padding: 12px 15px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+}
+
+
+.notifications-empty {
+    background: white;
+
+    border: 1px solid #eeece6;
+    border-radius: 12px;
+
+    padding: 35px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    gap: 12px;
+
+    color: #85877f;
+}
+
+
+.notifications-empty p {
+    margin: 0;
+    font-size: 12px;
+}

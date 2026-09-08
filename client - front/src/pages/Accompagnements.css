@@ -1,0 +1,113 @@
+.accompagnements-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #fbfaf7;
+    color: #292c27;
+}
+
+.accompagnements-content {
+    flex: 1;
+    padding: 55px 65px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.accompagnements-header {
+    margin-bottom: 35px;
+}
+
+.accompagnements-header h1 {
+    margin: 0 0 7px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.accompagnements-header p {
+    margin: 0;
+    color: #73766f;
+    font-size: 14px;
+}
+
+.patients-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.patient-item {
+    background: white;
+    border: 1px solid #eeece6;
+    border-radius: 12px;
+    padding: 22px;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    box-shadow: 0 3px 12px rgba(50, 55, 45, 0.04);
+}
+
+.patient-item-avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #e8eee3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #56684f;
+    font-size: 20px;
+    font-weight: 600;
+
+    flex-shrink: 0;
+}
+
+.patient-item-info {
+    flex: 1;
+}
+
+.patient-item-info h2 {
+    margin: 0 0 7px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.patient-item-info p {
+    margin: 3px 0;
+    color: #7e8179;
+    font-size: 11px;
+}
+
+.patient-button {
+    border: 1px solid #9ba493;
+    background: white;
+    color: #4f6049;
+
+    padding: 8px 12px;
+    border-radius: 7px;
+
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.patient-button:hover {
+    background: #f0f4ed;
+}
+
+.accompagnements-error {
+    background: #fff0ed;
+    color: #9b463b;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.empty-card {
+    background: white;
+    border: 1px solid #eeece6;
+    border-radius: 12px;
+    padding: 25px;
+    color: #85877f;
+}

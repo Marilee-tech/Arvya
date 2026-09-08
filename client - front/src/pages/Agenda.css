@@ -1,0 +1,141 @@
+.agenda-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #fbfaf7;
+    color: #292c27;
+}
+
+.agenda-content {
+    flex: 1;
+    padding: 55px 65px;
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+.agenda-header {
+    margin-bottom: 35px;
+}
+
+.agenda-header h1 {
+    margin: 0 0 7px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.agenda-header p {
+    margin: 0;
+    color: #73766f;
+    font-size: 14px;
+}
+
+.agenda-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.agenda-card {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+
+    background: #ffffff;
+
+    border: 1px solid #eeece6;
+    border-radius: 12px;
+
+    padding: 20px 24px;
+
+    box-shadow: 0 3px 12px rgba(50, 55, 45, 0.04);
+}
+
+.agenda-date {
+    width: 58px;
+    height: 62px;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+    background: #e9efe5;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: #52664b;
+}
+
+.agenda-day {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.agenda-month {
+    margin-top: 5px;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.agenda-info {
+    flex: 1;
+}
+
+.agenda-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.agenda-title-row h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.agenda-hour {
+    background: #f3f5ef;
+    color: #64705e;
+
+    padding: 5px 9px;
+    border-radius: 20px;
+
+    font-size: 10px;
+}
+
+.agenda-location {
+    margin: 8px 0 0;
+    color: #777b73;
+    font-size: 12px;
+}
+
+.agenda-comment {
+    margin: 8px 0 0;
+
+    color: #8a8d86;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.agenda-error {
+    background: #fff0ed;
+    color: #9b463b;
+
+    padding: 12px 15px;
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+}
+
+.agenda-empty {
+    background: white;
+
+    border: 1px solid #eeece6;
+    border-radius: 12px;
+
+    padding: 25px;
+
+    color: #85877f;
+}
