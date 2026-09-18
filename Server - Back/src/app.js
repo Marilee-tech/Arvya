@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser'
 import db from './config/db.js';
 import userRoutes from './routes/userRoutes.js'
 import patientRoutes from './routes/patientRoutes.js'
@@ -11,8 +12,21 @@ import authRoutes from './routes/authRoutes.js'
 
 const app = express()
 
-app.use(cors())
+// =====================================
+// CORS
+// =====================================
+
+// Autorise le Frontend React à communiquer
+// avec notre Backend.
+//
+// credentials: true autorise notamment
+// l'envoi et la réception des cookies.
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}))
 app.use(express.json())
+app.use(cookieParser())
 
 app.get('/', (req, res) => {
     res.json({

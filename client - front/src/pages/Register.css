@@ -1,3 +1,7 @@
+/* ======================================== */
+/* PAGE CRÉATION DE COMPTE */
+/* ======================================== */
+
 .register-page {
     min-height: 100vh;
 
@@ -10,9 +14,9 @@
 }
 
 
-/* ================================= */
+/* ======================================== */
 /* PARTIE GAUCHE */
-/* ================================= */
+/* ======================================== */
 
 .register-brand {
     position: relative;
@@ -22,7 +26,9 @@
     padding: 40px 55px;
 
     display: flex;
+
     flex-direction: column;
+
     justify-content: space-between;
 
     background:
@@ -33,10 +39,15 @@
 }
 
 
+/* ======================================== */
+/* BOUTON RETOUR */
+/* ======================================== */
+
 .register-back {
     width: fit-content;
 
     display: flex;
+
     align-items: center;
 
     gap: 7px;
@@ -49,14 +60,22 @@
 
     color: #65705f;
 
-    font-size: 10px;
+    font-size: 13px;
+
+    cursor: pointer;
 }
 
+
+/* ======================================== */
+/* CONTENU PARTIE GAUCHE */
+/* ======================================== */
 
 .register-brand-content {
     max-width: 430px;
 }
 
+
+/* Logo */
 
 .register-logo {
     width: 120px;
@@ -64,6 +83,8 @@
     margin-bottom: 42px;
 }
 
+
+/* Titre principal */
 
 .register-brand h1 {
     margin: 0;
@@ -82,10 +103,14 @@
 }
 
 
+/* Partie verte du titre */
+
 .register-brand h1 span {
     color: #708368;
 }
 
+
+/* Description */
 
 .register-brand-content p {
     max-width: 390px;
@@ -94,33 +119,36 @@
 
     color: #70786c;
 
-    font-size: 13px;
+    font-size: 16px;
 
-    line-height: 1.8;
+    line-height: 1.7;
 }
 
+
+/* Petite citation en bas */
 
 .register-quote {
     margin: 0;
 
     color: #818a7c;
 
-    font-size: 9px;
+    font-size: 12px;
 
     letter-spacing: 0.3px;
 }
 
 
-
-/* ================================= */
-/* FORMULAIRE */
-/* ================================= */
+/* ======================================== */
+/* PARTIE FORMULAIRE */
+/* ======================================== */
 
 .register-form-section {
     min-height: 100vh;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     padding: 45px;
@@ -134,17 +162,23 @@
 }
 
 
+/* ======================================== */
+/* EN-TÊTE FORMULAIRE */
+/* ======================================== */
+
 .register-form-header {
     margin-bottom: 28px;
 }
 
+
+/* Petit texte CRÉATION DE COMPTE */
 
 .register-eyebrow {
     margin: 0 0 9px;
 
     color: #7d8977;
 
-    font-size: 9px;
+    font-size: 12px;
 
     font-weight: 600;
 
@@ -154,12 +188,14 @@
 }
 
 
+/* Titre Créer votre compte */
+
 .register-form-header h2 {
     margin: 0;
 
     color: #30352e;
 
-    font-size: 27px;
+    font-size: 30px;
 
     font-weight: 500;
 
@@ -167,24 +203,33 @@
 }
 
 
+/* Sous-titre */
+
 .register-form-header>p:last-child {
-    margin-top: 7px;
+    margin-top: 8px;
 
     color: #83877f;
 
-    font-size: 10px;
+    font-size: 14px;
+
+    line-height: 1.5;
 }
 
 
-/* FORM */
+/* ======================================== */
+/* FORMULAIRE */
+/* ======================================== */
 
 .register-form {
     display: flex;
+
     flex-direction: column;
 
-    gap: 15px;
+    gap: 16px;
 }
 
+
+/* Deux champs sur une ligne */
 
 .register-row {
     display: grid;
@@ -195,27 +240,34 @@
 }
 
 
+/* Groupe label + input */
+
 .register-field {
     display: flex;
+
     flex-direction: column;
 
-    gap: 6px;
+    gap: 7px;
 }
 
+
+/* Labels */
 
 .register-field label {
     color: #555c52;
 
-    font-size: 9px;
+    font-size: 13px;
 
     font-weight: 500;
 }
 
 
+/* Champs */
+
 .register-field input {
     width: 100%;
 
-    padding: 11px 12px;
+    padding: 12px 13px;
 
     border: 1px solid #dedfd9;
 
@@ -227,7 +279,9 @@
 
     color: #30342e;
 
-    font-size: 10px;
+    font-size: 14px;
+
+    box-sizing: border-box;
 
     transition:
         border 0.2s ease,
@@ -235,10 +289,16 @@
 }
 
 
+/* Placeholder */
+
 .register-field input::placeholder {
     color: #adb0aa;
+
+    font-size: 13px;
 }
 
+
+/* Champ sélectionné */
 
 .register-field input:focus {
     border-color: #899a82;
@@ -248,29 +308,37 @@
 }
 
 
-
-/* PASSWORD */
+/* ======================================== */
+/* MOT DE PASSE */
+/* ======================================== */
 
 .register-password {
     position: relative;
+
 }
 
 
 .register-password input {
     padding-right: 42px;
+
 }
 
+
+/* Bouton afficher / masquer mot de passe */
 
 .register-password button {
     position: absolute;
 
     top: 50%;
+
     right: 10px;
 
     transform: translateY(-50%);
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     padding: 4px;
@@ -280,16 +348,19 @@
     background: transparent;
 
     color: #858b81;
+
+    cursor: pointer;
 }
 
 
-
-/* ERREUR */
+/* ======================================== */
+/* MESSAGE D'ERREUR */
+/* ======================================== */
 
 .register-error {
     margin: 0;
 
-    padding: 9px 11px;
+    padding: 10px 12px;
 
     border: 1px solid #efd8d5;
 
@@ -299,16 +370,20 @@
 
     color: #a15e57;
 
-    font-size: 9px;
+    font-size: 13px;
+
+    line-height: 1.4;
 }
 
 
-/* SUCCÈS */
+/* ======================================== */
+/* MESSAGE DE SUCCÈS */
+/* ======================================== */
 
 .register-success {
     margin: 0;
 
-    padding: 9px 11px;
+    padding: 10px 12px;
 
     border: 1px solid #dbe7d7;
 
@@ -318,22 +393,27 @@
 
     color: #5e7956;
 
-    font-size: 9px;
+    font-size: 13px;
+
+    line-height: 1.4;
 }
 
 
-
-/* BOUTON */
+/* ======================================== */
+/* BOUTON CRÉER MON COMPTE */
+/* ======================================== */
 
 .register-submit {
     width: 100%;
 
     margin-top: 4px;
 
-    padding: 12px 15px;
+    padding: 13px 15px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     gap: 8px;
@@ -346,15 +426,19 @@
 
     color: white;
 
-    font-size: 10px;
+    font-size: 14px;
 
     font-weight: 500;
+
+    cursor: pointer;
 
     transition:
         background 0.2s ease,
         transform 0.2s ease;
 }
 
+
+/* Survol */
 
 .register-submit:hover:not(:disabled) {
     background: #43573e;
@@ -363,6 +447,8 @@
 }
 
 
+/* Bouton désactivé */
+
 .register-submit:disabled {
     opacity: 0.6;
 
@@ -370,23 +456,28 @@
 }
 
 
-
-/* CONNEXION */
+/* ======================================== */
+/* LIEN CONNEXION */
+/* ======================================== */
 
 .register-login-link {
     margin-top: 22px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     gap: 5px;
 
     color: #898d85;
 
-    font-size: 9px;
+    font-size: 13px;
 }
 
+
+/* Bouton "Se connecter" */
 
 .register-login-link button {
     padding: 0;
@@ -397,20 +488,26 @@
 
     color: #5f7259;
 
-    font-size: 9px;
+    font-size: 13px;
 
     font-weight: 600;
+
+    cursor: pointer;
 }
 
 
+/* ======================================== */
+/* INFORMATION SUR LE COMPTE */
+/* ======================================== */
+
 .register-account-info {
-    max-width: 350px;
+    max-width: 370px;
 
     margin: 20px auto 0;
 
     color: #9a9e96;
 
-    font-size: 8px;
+    font-size: 11px;
 
     line-height: 1.6;
 
@@ -418,10 +515,9 @@
 }
 
 
-
-/* ================================= */
-/* RESPONSIVE */
-/* ================================= */
+/* ======================================== */
+/* RESPONSIVE TABLETTE */
+/* ======================================== */
 
 @media (max-width: 850px) {
 
@@ -429,6 +525,8 @@
         grid-template-columns: 1fr;
     }
 
+
+    /* On masque la partie gauche */
 
     .register-brand {
         display: none;
@@ -438,14 +536,29 @@
     .register-form-section {
         padding: 35px 22px;
     }
-
 }
 
 
+/* ======================================== */
+/* RESPONSIVE MOBILE */
+/* ======================================== */
+
 @media (max-width: 480px) {
+
+    /* Prénom / Nom passent
+       l'un sous l'autre */
 
     .register-row {
         grid-template-columns: 1fr;
     }
 
+
+    .register-form-header h2 {
+        font-size: 27px;
+    }
+
+
+    .register-form-section {
+        padding: 30px 18px;
+    }
 }

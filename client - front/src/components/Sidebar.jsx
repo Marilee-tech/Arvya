@@ -148,20 +148,42 @@ function Sidebar() {
                 <button
                     className="logout-button"
                     type="button"
-                    onClick={() => {
+                    onClick={async () => {
 
-                        localStorage.removeItem('token')
-                        localStorage.removeItem('utilisateur')
+                        try {
 
-                        navigate('/login')
+                            // On appelle le Backend pour lui demander
+                            // de supprimer le cookie HttpOnly.
+                            await fetch(
+                                'http://localhost:3000/auth/logout',
+                                {
+                                    method: 'POST',
 
+                                    // Permet d'envoyer le cookie
+                                    // avec la requête.
+                                    credentials: 'include'
+                                }
+                            )
+
+                        } catch (error) {
+
+                            console.error(
+                                'Erreur lors de la déconnexion :',
+                                error
+                            )
+
+                        } finally {
+
+                            localStorage.removeItem('utilisateur')
+
+
+                            // Retour vers la page de connexion.
+                            navigate('/login')
+                        }
                     }}
                 >
-
                     <LogOut size={17} />
-
                     <span>Déconnexion</span>
-
                 </button>
 
 

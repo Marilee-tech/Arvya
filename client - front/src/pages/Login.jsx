@@ -68,6 +68,10 @@ function Login() {
                             'application/json'
                     },
 
+                    // Autorise le navigateur à recevoir
+                    // et envoyer les cookies avec le Backend
+                    credentials: 'include',
+
                     body: JSON.stringify({
 
                         email,
@@ -92,14 +96,6 @@ function Login() {
                 )
 
             }
-
-
-            // Stockage du token
-
-            localStorage.setItem(
-                'token',
-                data.token
-            )
 
 
             // Stockage de l'utilisateur

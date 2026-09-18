@@ -9,58 +9,215 @@ import transporter from '../config/mailer.js'
 // =====================================
 
 const login = async (req, res) => {
-
     try {
-
+        // On récupère l'email et le mot de passe
+        // envoyés depuis le formulaire de connexion.
         const {
             email,
             motDePasse
         } = req.body
 
 
+        // =====================================
+        // 1. RECHERCHE DE L'UTILISATEUR
+        // =====================================
+
+        // On recherche l'utilisateur grâce à son email.
+        //
+        // "est_bloque" vaudra :
+        // 1 = le compte est actuellement bloqué
+        // 0 = le compte n'est pas bloqué
+        //
+        // NOW() correspond à la date et l'heure
+        // actuelles de MySQL.
         const [rows] = await db.query(
-            'SELECT * FROM Utilisateur WHERE email = ?',
+            `SELECT *,
+                (
+                    bloque_jusqua IS NOT NULL
+                    AND bloque_jusqua > NOW()
+                ) AS est_bloque
+             FROM Utilisateur
+             WHERE email = ?`,
             [email]
         )
 
-
+        // On récupère le premier utilisateur trouvé.
         const utilisateur = rows[0]
 
 
-        if (!utilisateur) {
+        // =====================================
+        // 2. UTILISATEUR INTROUVABLE
+        // =====================================
 
+        // Si aucun utilisateur ne correspond à cet email,
+        // on refuse la connexion.
+        //
+        // On reste volontairement vague :
+        // on ne précise pas si c'est l'email
+        // ou le mot de passe qui est incorrect.
+        if (!utilisateur) {
             return res.status(401).json({
                 message: 'Email ou mot de passe incorrect'
             })
-
         }
 
 
-        if (utilisateur.statut === 'Inactif') {
+        // =====================================
+        // 3. VÉRIFICATION DU STATUT
+        // =====================================
 
+        // Un compte avec le statut "Inactif"
+        // n'a pas le droit de se connecter.
+        if (utilisateur.statut === 'Inactif') {
             return res.status(403).json({
                 message: 'Compte inactif'
             })
-
         }
 
 
-        const motDePasseCorrect =
-            await bcrypt.compare(
-                motDePasse,
-                utilisateur.mot_de_passe
+        // =====================================
+        // 4. COMPTE TEMPORAIREMENT BLOQUÉ
+        // =====================================
+
+        // Si est_bloque vaut 1,
+        // cela signifie que bloque_jusqua
+        // contient une date située dans le futur.
+        //
+        // On refuse donc immédiatement la connexion.
+        if (utilisateur.est_bloque) {
+            return res.status(429).json({
+                message:
+                    'Trop de tentatives de connexion. Réessayez dans quelques minutes.'
+            })
+        }
+
+
+        // =====================================
+        // 5. BLOCAGE EXPIRÉ
+        // =====================================
+
+        // Si bloque_jusqua contient encore une date
+        // mais que est_bloque vaut 0,
+        // cela signifie que les 5 minutes sont terminées.
+        //
+        // On remet donc le compteur à zéro
+        // et on supprime la date de blocage.
+        if (utilisateur.bloque_jusqua) {
+            await db.query(
+                `UPDATE Utilisateur
+                 SET tentatives_connexion = 0,
+                     bloque_jusqua = NULL
+                 WHERE id_utilisateur = ?`,
+                [utilisateur.id_utilisateur]
             )
 
+            // On met également à jour la valeur
+            // dans notre objet JavaScript.
+            utilisateur.tentatives_connexion = 0
+        }
+
+
+        // =====================================
+        // 6. VÉRIFICATION DU MOT DE PASSE
+        // =====================================
+
+        // bcrypt.compare compare :
+        // - le mot de passe saisi par l'utilisateur
+        // - le mot de passe haché enregistré dans MySQL
+        //
+        // Le résultat est true ou false.
+        const motDePasseCorrect = await bcrypt.compare(
+            motDePasse,
+            utilisateur.mot_de_passe
+        )
+
+
+        // =====================================
+        // 7. MAUVAIS MOT DE PASSE
+        // =====================================
 
         if (!motDePasseCorrect) {
+
+            // On récupère le nombre de tentatives actuel
+            // puis on ajoute 1.
+            const nouvellesTentatives =
+                utilisateur.tentatives_connexion + 1
+
+
+            // =====================================
+            // 3e TENTATIVE INCORRECTE
+            // =====================================
+
+            // À partir de la troisième erreur,
+            // le compte est bloqué pendant 5 minutes.
+            if (nouvellesTentatives >= 3) {
+
+                await db.query(
+                    `UPDATE Utilisateur
+                     SET tentatives_connexion = ?,
+                         bloque_jusqua =
+                            DATE_ADD(NOW(), INTERVAL 5 MINUTE)
+                     WHERE id_utilisateur = ?`,
+                    [
+                        nouvellesTentatives,
+                        utilisateur.id_utilisateur
+                    ]
+                )
+
+                return res.status(429).json({
+                    message:
+                        'Trop de tentatives de connexion. Compte bloqué pendant 5 minutes.'
+                })
+            }
+
+
+            // =====================================
+            // 1re OU 2e TENTATIVE INCORRECTE
+            // =====================================
+
+            // Le compte n'est pas encore bloqué.
+            // On enregistre simplement le nouveau
+            // nombre de tentatives dans MySQL.
+            await db.query(
+                `UPDATE Utilisateur
+                 SET tentatives_connexion = ?
+                 WHERE id_utilisateur = ?`,
+                [
+                    nouvellesTentatives,
+                    utilisateur.id_utilisateur
+                ]
+            )
 
             return res.status(401).json({
                 message: 'Email ou mot de passe incorrect'
             })
-
         }
 
 
+        // =====================================
+        // 8. CONNEXION RÉUSSIE
+        // =====================================
+
+        // Si le mot de passe est correct,
+        // on remet le compteur de tentatives à zéro.
+        //
+        // On supprime également une éventuelle
+        // ancienne date de blocage.
+        await db.query(
+            `UPDATE Utilisateur
+             SET tentatives_connexion = 0,
+                 bloque_jusqua = NULL
+             WHERE id_utilisateur = ?`,
+            [utilisateur.id_utilisateur]
+        )
+
+
+        // =====================================
+        // 9. CRÉATION DU JWT
+        // =====================================
+
+        // On crée le JWT contenant uniquement
+        // les informations nécessaires à l'authentification.
         const token = jwt.sign(
             {
                 id: utilisateur.id_utilisateur,
@@ -73,28 +230,131 @@ const login = async (req, res) => {
         )
 
 
-        res.status(200).json({
+        // =====================================
+        // 10. STOCKAGE DU JWT DANS UN COOKIE
+        // =====================================
 
-            message: 'Connexion réussie',
+        // Au lieu de laisser JavaScript gérer directement
+        // le JWT, le serveur l'enregistre dans un cookie.
+        //
+        // Le navigateur conservera ensuite ce cookie
+        // et pourra l'envoyer automatiquement au Backend.
+        res.cookie('token', token, {
 
-            token: token,
+            // HttpOnly empêche JavaScript côté navigateur
+            // de lire directement le contenu du cookie.
+            httpOnly: true,
 
-            utilisateur: {
+            // En développement nous travaillons en HTTP.
+            // En production avec HTTPS, secure sera activé.
+            secure: process.env.NODE_ENV === 'production',
 
-                id: utilisateur.id_utilisateur,
+            // Limite l'envoi du cookie dans certains
+            // contextes provenant d'autres sites.
+            sameSite: 'lax',
 
-                prenom: utilisateur.prenom,
-
-                nom: utilisateur.nom,
-
-                email: utilisateur.email,
-
-                role: utilisateur.role
-
-            }
-
+            // Durée du cookie : 1 heure.
+            // maxAge est exprimé en millisecondes.
+            maxAge: 60 * 60 * 1000
         })
 
+
+        // =====================================
+        // 11. RÉPONSE AU FRONTEND
+        // =====================================
+
+        res.status(200).json({
+            message: 'Connexion réussie',
+
+            utilisateur: {
+                id: utilisateur.id_utilisateur,
+                prenom: utilisateur.prenom,
+                nom: utilisateur.nom,
+                email: utilisateur.email,
+                role: utilisateur.role
+            }
+        })
+
+    } catch (error) {
+
+        // Si une erreur inattendue se produit,
+        // elle est affichée dans le terminal.
+        console.log(error)
+
+        res.status(500).json({
+            message: 'Erreur serveur'
+        })
+    }
+}
+
+// =====================================
+// UTILISATEUR CONNECTÉ
+// =====================================
+
+const getMe = async (req, res) => {
+    try {
+
+        // req.user est créé par verifyToken.
+        //
+        // Le middleware a déjà :
+        // 1. récupéré le cookie
+        // 2. vérifié le JWT
+        // 3. placé son contenu dans req.user
+        const idUtilisateur = req.user.id
+
+
+        // On récupère les informations actuelles
+        // de l'utilisateur directement dans MySQL.
+        //
+        // On ne récupère volontairement PAS
+        // le mot de passe.
+        const [rows] = await db.query(
+            `SELECT
+                id_utilisateur,
+                prenom,
+                nom,
+                email,
+                role,
+                statut
+             FROM Utilisateur
+             WHERE id_utilisateur = ?`,
+            [idUtilisateur]
+        )
+
+
+        const utilisateur = rows[0]
+
+
+        // Si l'utilisateur contenu dans le JWT
+        // n'existe plus dans la base.
+        if (!utilisateur) {
+            return res.status(404).json({
+                message: 'Utilisateur non trouvé'
+            })
+        }
+
+
+        // Si le compte a été désactivé après
+        // la création de sa session.
+        if (utilisateur.statut === 'Inactif') {
+            return res.status(403).json({
+                message: 'Compte inactif'
+            })
+        }
+
+
+        // Tout est valide.
+        // On renvoie les informations utiles
+        // au Frontend.
+        res.status(200).json({
+            utilisateur: {
+                id: utilisateur.id_utilisateur,
+                prenom: utilisateur.prenom,
+                nom: utilisateur.nom,
+                email: utilisateur.email,
+                role: utilisateur.role
+            }
+        })
 
     } catch (error) {
 
@@ -103,12 +363,31 @@ const login = async (req, res) => {
         res.status(500).json({
             message: 'Erreur serveur'
         })
-
     }
-
 }
 
+// =====================================
+// DÉCONNEXION
+// =====================================
 
+const logout = (req, res) => {
+
+    // Le cookie est HttpOnly.
+    // React ne peut donc pas le supprimer directement.
+    //
+    // C'est le Backend qui doit demander
+    // au navigateur de supprimer le cookie.
+    res.clearCookie('token', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax'
+    })
+
+
+    res.status(200).json({
+        message: 'Déconnexion réussie'
+    })
+}
 
 // =====================================
 // INSCRIPTION PUBLIQUE
@@ -469,5 +748,7 @@ export {
     login,
     register,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    getMe,
+    logout
 }
