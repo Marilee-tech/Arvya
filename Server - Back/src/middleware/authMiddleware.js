@@ -7,11 +7,6 @@ import jwt from 'jsonwebtoken'
 
 const verifyToken = (req, res, next) => {
 
-    // Le JWT est maintenant stocké dans
-    // un cookie HttpOnly nommé "token".
-    //
-    // cookie-parser permet d'accéder
-    // aux cookies avec req.cookies.
     const token = req.cookies.token
 
 
@@ -19,8 +14,6 @@ const verifyToken = (req, res, next) => {
     // TOKEN ABSENT
     // =====================================
 
-    // Si aucun cookie "token" n'est présent,
-    // l'utilisateur n'est pas authentifié.
     if (!token) {
         return res.status(401).json({
             message: 'Token manquant'
@@ -34,39 +27,18 @@ const verifyToken = (req, res, next) => {
 
     try {
 
-        // jwt.verify vérifie :
-        // - que le token est valide
-        // - qu'il a été signé avec notre JWT_SECRET
-        // - qu'il n'est pas expiré
         const decoded = jwt.verify(
             token,
             process.env.JWT_SECRET
         )
 
-
-        // Le contenu du JWT est enregistré
-        // dans req.user.
-        //
-        // Dans ARVYA, il contient notamment :
-        // {
-        //     id: ...,
-        //     role: ...
-        // }
-        //
-        // Les routes suivantes peuvent donc
-        // savoir quel utilisateur est connecté.
         req.user = decoded
 
 
-        // Tout est valide :
-        // Express peut continuer vers
-        // le prochain middleware ou contrôleur.
         next()
 
     } catch (error) {
 
-        // Token invalide ou expiré :
-        // l'accès à la route est refusé.
         return res.status(401).json({
             message: 'Token invalide ou expiré'
         })

@@ -1,11 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import {
-    Eye,
-    EyeOff,
-    ArrowRight
-} from 'lucide-react'
+import { Eye, EyeOff, ArrowRight } from 'lucide-react'
 
 import logoArvya
     from '../assets/logo_sans_slogan-removebg-preview.png'

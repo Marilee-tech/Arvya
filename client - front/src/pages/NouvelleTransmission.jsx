@@ -16,6 +16,7 @@ function NouvelleTransmission() {
 
     const navigate = useNavigate()
 
+    // JSON.parse() permet de le convertir le json en objet javascript
     const utilisateur = JSON.parse(
         localStorage.getItem('utilisateur')
     )
@@ -30,6 +31,7 @@ function NouvelleTransmission() {
         visibilite: 'Famille',
         dateEvenement: ''
     })
+    // Création d'un seul objet qui contient tout les données du formulaire
 
     const [erreur, setErreur] = useState('')
     const [envoi, setEnvoi] = useState(false)
